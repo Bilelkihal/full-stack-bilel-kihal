@@ -5,7 +5,7 @@
         <div class="title">
              {{ balance }} USD_BTC
         </div>
-        <div class="button secondary-button buy">
+        <div class="button secondary-button buy" @click="openAddMoneyPage">
             Add money to wallet
         </div>
 
@@ -29,7 +29,7 @@
                         <div class="button primary-button" @click="checkoutPokemon(pokemon.id)" >
                             Checkout
                         </div>
-                        <div class="button secondary-button">
+                        <div class="button secondary-button" @click="openPokemon(pokemon.id)">
                             See details
                         </div>
                     </div>
@@ -75,6 +75,7 @@
 
 <script setup>
     import EmptyState from './EmptyState.vue';
+    import { useRouter } from 'vue-router';
 
     import { ref, onMounted } from 'vue';
     const API_URL = "http://localhost:3000";
@@ -147,6 +148,14 @@
         pokemonsInMarket.value = pokemonsInMarket.value.filter(pokemon => pokemon.id !== response_json.pokemon.id);
         is_checkout.value.state = false
         balance.value = parseFloat(balance.value) - parseFloat(response_json.pokemon.price)
+    }
+
+    const router = useRouter();
+    const openAddMoneyPage = () => {
+        router.push({name: 'AddMoneyPage'});
+    }
+    const openPokemon = (id) => {
+        router.push({ name: 'Pokemon', params: { id } });
     }
 
 </script>

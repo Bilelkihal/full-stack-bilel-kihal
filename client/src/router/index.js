@@ -4,6 +4,7 @@ import MarketPage from '../components/MarketPage.vue';
 import AllPokemons from '../components/AllPokemons.vue';
 import ProfilePage from '../components/ProfilePage.vue';
 import AddMoneyPage from '../components/AddMoneyPage.vue';
+import Pokemon from '../components/Pokemon.vue';
 
 
 const routes = [
@@ -32,6 +33,12 @@ const routes = [
     name: 'AddMoneyPage',
     component: AddMoneyPage
   },
+  {
+    path: '/pokemon/:id',
+    name: 'Pokemon',
+    component: Pokemon,
+    props: true
+  }
 
 ];
 

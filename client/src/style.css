@@ -121,7 +121,7 @@ button:focus-visible {
   border-radius: 8px;
   padding: 20px 0;
 }
-.pokemon-card img{
+.pokemon-card img, .profile_image{
   max-width: 200px;
   max-height: 200px;
 }
@@ -141,6 +141,13 @@ button:focus-visible {
 }
 .pokemon-action div+div{
   margin-left: 10px;
+}
+.info-line{
+  display: flex;
+}
+.first-row{
+  font-weight: 500;
+  margin-right: 10px;
 }
 
 
