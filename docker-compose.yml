@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  rails:
+    build:
+      context: .
+      dockerfile: Dockerfile # Assurez-vous que ce Dockerfile est bien nommé et configuré
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    command: bash -c "bundle exec rails server -b 0.0.0.0"
+
+  vue:
+    build:
+      context: ./client
+      dockerfile: Dockerfile # Utilise le Dockerfile pour le développement Vite
+    ports:
+      - '5173:5173'
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    command: ["npm", "run", "dev"]
