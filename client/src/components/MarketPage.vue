@@ -75,7 +75,6 @@
 
 <script setup>
     import EmptyState from './EmptyState.vue';
-    import { defineProps } from 'vue';
 
     import { ref, onMounted } from 'vue';
     const API_URL = "http://localhost:3000";

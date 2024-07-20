@@ -4,9 +4,21 @@
 
     <div class="card-component">
         <div class="title">
-            Latest transactions
+            My last transactions
         </div>
-        <EmptyState message="No transaction is done yet" />
+        <EmptyState v-if="transactions.length===0" message="No transaction is done yet" />
+        <div v-else class="div">
+            <div v-for="transaction in transactions.slice(0, 3)" :key="transaction.id">
+                <div class="info-line">
+                    <div class="first-row">Action</div>
+                    <div class="second-row">{{ transaction.action }}</div>
+                </div>
+                <div class="info-line">
+                    <div class="first-row">Pokemon id</div>
+                    <div class="second-row">{{ transaction.pokemon_id }}</div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="landing-call-to-actions">
         <div class="button primary-button" @click="openMarketPage">
@@ -23,6 +35,17 @@
 <script setup>
     import EmptyState from './EmptyState.vue';
     import { useRouter } from 'vue-router';
+
+    import { ref, onMounted } from 'vue';
+    const API_URL = "http://localhost:3000";
+
+    const transactions = ref([])
+
+    onMounted(async() => {
+        const transaction_api = await fetch(`${API_URL}/me/transactions`)
+        const transaction_api_json = await transaction_api.json()
+        transactions.value = transaction_api_json  
+    })
 
     const router = useRouter();
     const openMarketPage = () => {

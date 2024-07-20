@@ -1,11 +1,11 @@
 <template>
     <div class="card-component">
         <div class="title">User Profile</div>
-        <div class="user-profile-line">
+        <div class="info-line">
             <div class="first-row">Email</div>
             <div class="second-row">{{ user.email }}</div>
         </div>
-        <div class="user-profile-line">
+        <div class="info-line">
             <div class="first-row">Balence</div>
             <div class="second-row">{{ user.balance }}</div>
         </div>
