@@ -13,6 +13,13 @@ class PokemonsController < ApplicationController
     render json: @pokemon
   end
 
+  # Get market/pokemons
+  def market
+    all_pokemons = Pokemon.all
+    market_pokemons = all_pokemons.reject { |pokemon| pokemon.id == current_user.id }
+    render json: market_pokemons
+  end
+
   # POST /pokemons
   def create
     @pokemon = Pokemon.new(pokemon_params)

@@ -20,6 +20,12 @@ class UsersController < ApplicationController
     render json: transactions
   end
 
+  # GET /me/pokemons
+  def pokemons
+    pokemons = @current_user.pokemons
+    render json: pokemons
+  end
+
   # GET /users/1
   def show
     render json: @user
