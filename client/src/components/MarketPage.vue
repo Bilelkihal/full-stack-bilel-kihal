@@ -89,12 +89,15 @@
     }
 
     const sellPokemon = async(id) => {
-        const response = await fetch(`${API_URL}/pokemon/3/sell`, {
+        const response = await fetch(`${API_URL}/pokemon/${id}/sell`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             }
-        }) 
+        })
+        const response_json = await response.json()
+        pokemonsInMarket.value.push(response_json.pokemon)
+        myPokemons.value = myPokemons.value.filter(pokemon => pokemon.id !== response_json.pokemon.id);
     }
 
     const checkoutPokemon = async(id) => {
@@ -108,8 +111,17 @@
         }
     }
 
-    const buyPokemon = () => {
-        // todo: buy logic
+    const buyPokemon = async(id) => {
+        const response = await fetch(`${API_URL}/pokemon/${id}/buy`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }) 
+        const response_json = await response.json()
+        myPokemons.value.push(response_json.pokemon)
+        pokemonsInMarket.value = pokemonsInMarket.value.filter(pokemon => pokemon.id !== response_json.pokemon.id);
+        is_checkout.value.state = false
     }
 
 </script>
