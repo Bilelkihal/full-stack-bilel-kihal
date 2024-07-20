@@ -8,6 +8,18 @@ class UsersController < ApplicationController
     render json: @users
   end
 
+  # GET /me
+  def show_me
+    set_current_user
+    render json: @current_user
+  end
+
+  # GET /me/transactions
+  def transactions
+    transactions = @current_user.transactions
+    render json: transactions
+  end
+
   # GET /users/1
   def show
     render json: @user
@@ -47,5 +59,9 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:email, :password_digest, :balance)
+    end
+
+    def set_current_user
+      @current_user = current_user
     end
 end
