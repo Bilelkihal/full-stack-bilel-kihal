@@ -24,6 +24,52 @@ class PokemonsController < ApplicationController
     end
   end
 
+  # GET /pokemon/:id/checkout
+  def checkout
+    pokemon = Pokemon.find(params[:id])
+    if current_user.balance >= pokemon.price
+      render json: { can_buy: true, pokemon: pokemon }
+    else
+      render json: { can_buy: false, message: 'Insufficient balance' }
+    end
+  end
+
+  # POST /pokemon/:id/buy
+  def buy
+    seller_id = 2
+    seller = User.find(seller_id)
+    pokemon = Pokemon.find(params[:id])
+    if current_user.balance >= pokemon.price
+      ActiveRecord::Base.transaction do
+        current_user.update!(balance: current_user.balance - pokemon.price)
+        seller.update!(balance: current_user.balance + pokemon.price)
+        pokemon.update!(user: current_user, last_sell_price: pokemon.price)
+        Transaction.create!(user: current_user, pokemon: pokemon, action: 'buy')
+      end
+      render json: { message: 'Purchase successful', pokemon: pokemon }
+    else
+      render json: { message: 'Insufficient balance', status: :unprocessable_entity }
+    end
+  end
+
+  # POST /pokemon/:id/sell
+  def sell
+    buyer_id = 2
+    buyer = User.find(buyer_id)
+    pokemon = Pokemon.find(params[:id])
+    if pokemon.user == current_user
+      ActiveRecord::Base.transaction do
+        current_user.update!(balance: current_user.balance + pokemon.price)
+        buyer.update!(balance: current_user.balance - pokemon.price)
+        pokemon.update!(user_id: buyer_id, last_sell_price: pokemon.price)
+        Transaction.create!(user: current_user, pokemon: pokemon, action: 'sell')
+      end
+      render json: { message: 'Sale successful', pokemon: pokemon }
+    else
+      render json: { message: 'You do not own this Pokemon' }, status: :unprocessable_entity
+    end
+  end
+
   # PATCH/PUT /pokemons/1
   def update
     if @pokemon.update(pokemon_params)
