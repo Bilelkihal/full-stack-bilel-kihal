@@ -11,6 +11,12 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --primary-color: #3b4cca;
+  --primary-hover-color: #4458f0;
+  --secondary-color: #ffde00;
+  --danger-color: #e74c3c;
+  --light-gray: #e3e3e3;
 }
 
 a {
@@ -64,6 +70,48 @@ button:focus-visible {
   padding: 2rem;
   text-align: center;
 }
+.button{
+  cursor: pointer;
+  text-decoration: none;
+  padding: 15px 20px;
+  border-radius: 8px;
+  font-size: 18px;
+  display: inline;
+  transition: background-color 0.3s ease;
+}
+
+.primary-button{
+  color: white;
+  background-color: var(--primary-color);
+
+}
+.primary-button:hover{
+  background-color: var(--primary-hover-color);
+}
+.secondary-button{
+  color: var(--primary-color);
+  background-color: white;
+  border: 1px solid var(--primary-color);
+}
+
+.secondary-button:hover{
+  color: white;
+  background-color: var(--primary-color);
+}
+
+.card-component{
+  border: 1px solid var(--light-gray);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 50px;
+}
+.card-component .title{
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+
 
 @media (prefers-color-scheme: light) {
   :root {
