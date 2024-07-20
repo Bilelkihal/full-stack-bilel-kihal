@@ -111,6 +111,38 @@ button:focus-visible {
   margin-bottom: 20px;
 }
 
+.pokemon-card{
+  border: 1px solid var(--light-gray);
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 8px;
+  padding: 20px 0;
+}
+.pokemon-card img{
+  max-width: 200px;
+  max-height: 200px;
+}
+.pokemon-name{
+  font-size: 20px;
+  font-weight: 500;
+}
+.pokemon-price{
+  color: gray;
+}
+.pokemon-action{
+  display: flex;
+  justify-content: center;
+}
+.pokemon-action div{
+  margin-top: 10px;
+}
+.pokemon-action div+div{
+  margin-left: 10px;
+}
+
 
 
 @media (prefers-color-scheme: light) {

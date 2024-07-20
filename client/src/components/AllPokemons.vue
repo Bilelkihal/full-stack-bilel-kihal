@@ -1,12 +1,21 @@
 <template>
     <div class="card-component">
-        <EmptyState v-if="!allPokemons" message="There is no pokemon for sale" />
+        <EmptyState v-if="allPokemons.length===0" message="There is no pokemon for sale" />
         <div v-else class="pokemons">
             <div class="title">
                 All pokemons
             </div>
             <div v-for="pokemon in allPokemons" :key="pokemon.id">
-                <PokemonCard :name=pokemon.name :image_path=pokemon.image_path :price="pokemon.price" />
+                <div  class="pokemon-card">
+                    <img :src=pokemon.image_path alt="">
+                    <div class="pokemon-name">{{ pokemon.name }}</div>
+                    <div class="pokemon-price">{{ pokemon.price }} USD_BTC</div>
+                    <div class="pokemon-action">
+                        <div class="button secondary-button">
+                            See details
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -17,7 +26,6 @@
 </template>
 
 <script setup>
-    import PokemonCard from './PokemonCard.vue';
     import EmptyState from './EmptyState.vue';
     import { ref, onMounted } from 'vue';
 
@@ -45,4 +53,5 @@
         font-size: 16px;
         font-weight: 400;
     }
+
 </style>

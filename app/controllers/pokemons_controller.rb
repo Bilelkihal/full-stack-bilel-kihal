@@ -16,7 +16,7 @@ class PokemonsController < ApplicationController
   # Get market/pokemons
   def market
     all_pokemons = Pokemon.all
-    market_pokemons = all_pokemons.reject { |pokemon| pokemon.id == current_user.id }
+    market_pokemons = all_pokemons.reject { |pokemon| pokemon.user_id == current_user.id }
     render json: market_pokemons
   end
 
