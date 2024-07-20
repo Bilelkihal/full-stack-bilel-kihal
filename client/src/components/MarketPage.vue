@@ -15,11 +15,11 @@
 
 
     <div class="card-component">
+        <div class="title">
+            Pokemons in the market
+        </div>
         <EmptyState v-if="pokemonsInMarket.length===0" message="There is no pokemon for sale" />
         <div v-else class="pokemons">
-            <div class="title">
-                Pokemons in the market
-            </div>
             <div v-for="pokemon in pokemonsInMarket" :key="pokemon.id">
                 <div class="pokemon-card"> <!-- todo: extract pokemon card as a component -->
                     <img :src=pokemon.image_path alt="">
@@ -48,11 +48,11 @@
     </div>
 
     <div class="card-component">
+        <div class="title">
+            My pokemons
+        </div>
         <EmptyState v-if="myPokemons.length===0" message="You didn't buy any pokemon yet" />
-        <div v-else class="pokemons">
-            <div class="title">
-                My pokemons
-            </div>
+        <div v-else class="pokemons">  
             <div v-for="pokemon in myPokemons" :key="pokemon.id">
                 <div class="pokemon-card">
                     <img :src=pokemon.image_path alt="">
@@ -62,7 +62,7 @@
                         <div class="button primary-button" @click="sellPokemon(pokemon.id)" >
                             sell
                         </div>
-                        <div class="button secondary-button">
+                        <div class="button secondary-button" @click="openPokemon(pokemon.id)">
                             See details
                         </div>
                     </div>

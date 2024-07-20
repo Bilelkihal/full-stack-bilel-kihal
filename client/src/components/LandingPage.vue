@@ -17,6 +17,7 @@
                     <div class="first-row">Pokemon id</div>
                     <div class="second-row">{{ transaction.pokemon_id }}</div>
                 </div>
+                <hr>
             </div>
         </div>
     </div>
@@ -66,5 +67,8 @@
     }
     .landing-call-to-actions div+div{
         margin-left: 20px;
+    }
+    hr{
+        border: 0.5px solid var(--light-gray);
     }
 </style>
