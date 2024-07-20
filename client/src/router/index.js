@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import LandingPage from '../components/LandingPage.vue';
 import MarketPage from '../components/MarketPage.vue';
 import AllPokemons from '../components/AllPokemons.vue';
+import ProfilePage from '../components/ProfilePage.vue';
+import AddMoneyPage from '../components/AddMoneyPage.vue';
 
 
 const routes = [
@@ -19,7 +21,17 @@ const routes = [
     path: '/pokemons',
     name: 'AllPokemons',
     component: AllPokemons
-  }
+  },
+  {
+    path: '/me',
+    name: 'profilePage',
+    component: ProfilePage
+  },
+  {
+    path: '/me/add',
+    name: 'AddMoneyPage',
+    component: AddMoneyPage
+  },
 
 ];
 

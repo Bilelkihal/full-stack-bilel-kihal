@@ -1,4 +1,19 @@
 <template>
+
+    <div class="card-component">
+        Your current balence is:
+        <div class="title">
+             {{ balance }} USD_BTC
+        </div>
+        <div class="button secondary-button buy">
+            Add money to wallet
+        </div>
+
+    </div>
+        
+        
+
+
     <div class="card-component">
         <EmptyState v-if="pokemonsInMarket.length===0" message="There is no pokemon for sale" />
         <div v-else class="pokemons">
@@ -71,10 +86,19 @@
 
     const is_checkout = ref({})
 
+    const balance = ref(0)
+
     onMounted(async() => {
         getPokemonsInMarket()
         getMyPokemons()
+        getUserBalance()
     })
+
+    const getUserBalance = async() => {
+        const user_api = await fetch(`${API_URL}/me`)
+        const user_api_json = await user_api.json()
+        balance.value = user_api_json.balance
+    }
 
     const getPokemonsInMarket = async() => {
         const pokemons = await fetch(`${API_URL}/market/pokemons`)
@@ -98,6 +122,7 @@
         const response_json = await response.json()
         pokemonsInMarket.value.push(response_json.pokemon)
         myPokemons.value = myPokemons.value.filter(pokemon => pokemon.id !== response_json.pokemon.id);
+        balance.value = parseFloat(balance.value) + parseFloat(response_json.pokemon.price)
     }
 
     const checkoutPokemon = async(id) => {
@@ -122,6 +147,7 @@
         myPokemons.value.push(response_json.pokemon)
         pokemonsInMarket.value = pokemonsInMarket.value.filter(pokemon => pokemon.id !== response_json.pokemon.id);
         is_checkout.value.state = false
+        balance.value = parseFloat(balance.value) - parseFloat(response_json.pokemon.price)
     }
 
 </script>

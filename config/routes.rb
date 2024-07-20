@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'me', to: 'users#show_me'
   get 'me/transactions', to: 'users#transactions'
   get 'me/pokemons', to: 'users#pokemons'
+  patch 'me/add', to: 'users#add'
 
   get 'pokemon/:id/checkout', to: 'pokemons#checkout'
   post 'pokemon/:id/buy', to: 'pokemons#buy'

@@ -26,6 +26,13 @@ class UsersController < ApplicationController
     render json: pokemons
   end
 
+  # PATCH /me/add
+  def add
+    set_current_user
+    @current_user.update!(balance: @current_user.balance + params[:balance].to_f)
+    render json: @current_user
+  end
+
   # GET /users/1
   def show
     render json: @user
